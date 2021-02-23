@@ -1,0 +1,27 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center none">
+  <div fxFlex="95%">
+
+    <mat-card>
+      <mat-card-content>
+        <h2>Parties</h2>
+
+        <table>
+          <thead>
+            <tr>
+              <td>Party Name</td>
+              <td>Category</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of parties">
+              <td>{{item.PartyName}}</td>
+              <td>{{item.Category}}</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+</div>
