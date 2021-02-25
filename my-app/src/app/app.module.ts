@@ -9,6 +9,7 @@ import { CustomMaterialModule } from './custom-material/custom-material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { LoggerModule } from 'ngx-logger';
 import { environment } from '../environments/environment';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { environment } from '../environments/environment';
     SharedModule,
     CustomMaterialModule.forRoot(),
     AppRoutingModule,
+    MatTableModule,
     LoggerModule.forRoot({
       serverLoggingUrl: `http://my-api/logs`,
       level: environment.logLevel,

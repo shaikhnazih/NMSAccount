@@ -5,3 +5,12 @@ table {
 th.mat-sort-header-sorted {
     color: black;
 }
+
+.table-header{
+    font-weight: bold;
+    font-size: 150%;
+}
+
+td, th {
+    width: 25%;
+  }

@@ -6,6 +6,7 @@ import { Title } from '@angular/platform-browser';
 
 import { NotificationService } from '../../core/services/notification.service';
 import { PartyService } from 'src/app/services/party.service';
+import {MatPaginator} from '@angular/material/paginator';
 
 export interface Party {
   PartyName: string;
@@ -28,24 +29,32 @@ export class CustomerListComponent implements OnInit {
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   parties: Party[] = [];
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  resultsLength = 5;
   constructor(
     private logger: NGXLogger,
     private notificationService: NotificationService,
     private titleService: Title,
     private partyService: PartyService
-  ) { }
+  ) { 
+  
+  }
   getData() {
     this.partyService.getParties().subscribe((parties: Party[]) => {
       console.log(parties);
       this.parties = parties;
+      //this.resultsLength = this.parties.total_count;
     });
   }
+
+  
   ngOnInit() {
     this.getData();
     this.titleService.setTitle('Accounts - Parties');
     //this.logger.log('Customers loaded');
     this.dataSource.sort = this.sort;
 
+    this.dataSource.paginator = this.paginator;
   }
 }
+
