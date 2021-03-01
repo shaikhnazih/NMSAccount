@@ -11,7 +11,7 @@ const Transactions = function (tranc) {
 
 
 Transactions.getAll = result => {
-    sql.query("select  id,transactionType,transactionMode,description,createdDate,modifiedDate,isdeleted,partyName, amount  from transaction", (err, res) => {
+    sql.query("select  id,transactionDateTime,transactionType,transactionMode,description,createdDate,modifiedDate,isdeleted,partyName, amount  from transaction", (err, res) => {
         // sql.query("select  id,transactionType,transactionMode,description,createdDate,modifiedDate,isdeleted,partyName, case when transactiontype ='Credit' then amount else (amount*(-1)) end as amount  from transaction", (err, res) => {
         if (err) {
             console.log("error: ", err);

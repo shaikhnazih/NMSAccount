@@ -6,7 +6,7 @@ import { Title } from '@angular/platform-browser';
 
 import { NotificationService } from '../../core/services/notification.service';
 import { TransactionService } from 'src/app/services/transaction.service';
-import {MatPaginator} from '@angular/material/paginator';
+import { MatPaginator } from '@angular/material/paginator';
 
 export interface Transaction {
   id: string;
@@ -26,7 +26,7 @@ export interface Transaction {
 
 
 export class TransactionListComponent implements OnInit {
-  displayedColumns: string[] = ['id','partyName', 'transactionType','transactionMode','description','amount'];
+  displayedColumns: string[] = ['transactionDateTime', 'partyName', 'transactionType', 'transactionMode', 'description', 'amount'];
   dataSource = new MatTableDataSource();
   transaction: Transaction[] = [];
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -35,14 +35,18 @@ export class TransactionListComponent implements OnInit {
   constructor(private logger: NGXLogger,
     private notificationService: NotificationService,
     private titleService: Title,
-    private transactionService: TransactionService) { 
-    
+    private transactionService: TransactionService) {
+
   }
 
   getData() {
     this.transactionService.getTransactions().subscribe((transaction: Transaction[]) => {
       console.log(transaction);
-      this.transaction = transaction;
+      this.dataSource = new MatTableDataSource(transaction);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+
+
       //this.resultsLength = this.parties.total_count;
     });
   }
@@ -50,10 +54,6 @@ export class TransactionListComponent implements OnInit {
   ngOnInit() {
     this.getData();
     this.titleService.setTitle('Accounts - Transaction');
-    //this.logger.log('Customers loaded');
-    this.dataSource.sort = this.sort;
-
-    this.dataSource.paginator = this.paginator;
   }
 
 }

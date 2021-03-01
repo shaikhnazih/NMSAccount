@@ -70,10 +70,18 @@
 
         <a mat-list-item [routerLink]="['/customers']" routerLinkActive="active">
           <mat-icon mat-list-icon>
-            business
+            list
           </mat-icon>
-          <p mat-line> Customers </p>
+          <p mat-line> Parties </p>
         </a>
+        <a mat-list-item [routerLink]="['/transactions']" routerLinkActive="active">
+          <mat-icon mat-list-icon>
+            grading
+          </mat-icon>
+          <p mat-line> Transactions </p>
+        </a>
+
+
         <a mat-list-item [routerLink]="['/users']" routerLinkActive="active">
           <mat-icon mat-list-icon>
             people

@@ -146,3 +146,15 @@ p .mat-icon {
     opacity: 1;
   }
 }
+
+.my-container{
+ padding: 20px; 
+ height: 100%;
+}
+.heading1{
+  font-family: ui-serif;
+    background-color: #106cc8;
+    color: #fff;
+    padding-left: 31px;
+}
+  
