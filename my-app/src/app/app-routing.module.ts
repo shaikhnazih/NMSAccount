@@ -19,6 +19,11 @@ const appRoutes: Routes = [
         canActivate: [AuthGuard]
     },
     {
+        path: 'transactions',
+        loadChildren: './transaction/transaction.module#transactionModule',
+        canActivate: [AuthGuard]
+    },
+    {
         path: 'users',
         loadChildren: './users/users.module#UsersModule',
         canActivate: [AuthGuard]
