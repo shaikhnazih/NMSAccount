@@ -1,4 +1,8 @@
+
 <div class="mat-elevation-z8 my-container">
+    <!-- <span class="material-icons " color="primary">add_box</span> -->
+    <button mat-button color="primary" [routerLink]="['/transactions/add']">Add Transactions</button>
+    
   <mat-card class="heading1">
     <h1 class="md-display-3"><span style="text-align: center;"> Transactions</span> </h1>
   </mat-card>
@@ -53,3 +57,12 @@
   <mat-paginator [pageSizeOptions]="[10, 20,30,40]" showFirstLastButtons></mat-paginator>
 
 </div>
+
+<style>
+.white-icon {
+    color: blue;
+}
+/* Note: If you're using an SVG icon, you should make the class target the `<svg>` element */
+.white-icon svg {
+    fill: white;
+}</style>

@@ -10,7 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { LoggerModule } from 'ngx-logger';
 import { environment } from '../environments/environment';
 import {MatTableModule} from '@angular/material/table';
-
+import { MatRadioModule } from '@angular/material';
 @NgModule({
   declarations: [
     AppComponent
@@ -23,6 +23,7 @@ import {MatTableModule} from '@angular/material/table';
     CustomMaterialModule.forRoot(),
     AppRoutingModule,
     MatTableModule,
+    MatRadioModule,
     LoggerModule.forRoot({
       serverLoggingUrl: `http://my-api/logs`,
       level: environment.logLevel,

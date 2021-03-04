@@ -1,4 +1,5 @@
 
+const Transactions = require('../services/transactionRepo');
 const transactionService = require('../services/transactionRepo');
 
 var transactionControllers = {};
@@ -10,19 +11,23 @@ transactionControllers.create = (req, res) => {
             message: "Content can not be empty!"
         });
     }
-
-    // Create a Customer
-    const party = new Party({
+ 
+    // Create a Tansaction
+    const transaction = new Transactions({
+        transactionType: req.body.transactionType,
+        transactionMode: req.body.transactionMode,
+        transactionDateTime: req.body.transactionDateTime,
         partyName: req.body.partyName,
-        category: req.body.category
+        description: req.body.description,
+        amount: req.body.amount
     });
 
-    // Save Customer in the database
-    Party.Add(party, (err, data) => {
+    // Save Tansaction in the database
+    transactionService.Add(transaction, (err, data) => {
         if (err)
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while creating the Customer."
+                    err.message || "Some error occurred while adding transaction."
             });
         else res.send(data);
     });

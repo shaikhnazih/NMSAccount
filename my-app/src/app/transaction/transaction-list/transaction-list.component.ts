@@ -50,7 +50,10 @@ export class TransactionListComponent implements OnInit {
       //this.resultsLength = this.parties.total_count;
     });
   }
-
+  btnClick= function () {
+    alert("btnClick");
+    this.router.navigateByUrl('./customers/customers.module#CustomersModule');
+};
   ngOnInit() {
     this.getData();
     this.titleService.setTitle('Accounts - Transaction');
