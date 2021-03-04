@@ -16,6 +16,7 @@ export class TransactionService {
   }
 
   addTransactions(transaction: any) {
-    return this.http.post(this.rootURL + '/transaction', { transaction });
+    console.log(transaction)
+    return this.http.post(this.rootURL + '/transaction', transaction);
   }
 }

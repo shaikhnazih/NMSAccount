@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators, FormsModule} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators, FormsModule } from '@angular/forms';
 import { TransactionService } from 'src/app/services/transaction.service';
 
-export interface Transaction {
+export class Transaction {
   id: string;
-  transactionType: string;
-  transactionMode: string;
-  description: string;
-  partyName: string;
-  amount: string;
-  transactionDateTime: string;
+  transationType?: string;
+  transactionMode?: string;
+  description?: string;
+  partyName?: string;
+  amount?: string;
+  transactionDateTime?: string;
 
 }
 
@@ -22,43 +22,43 @@ export class TransactionAddComponent implements OnInit {
   options: FormGroup;
   floatLabelControl = new FormControl('auto');
 
-  constructor(fb: FormBuilder,private transactionService:TransactionService) { 
+  constructor(fb: FormBuilder, private transactionService: TransactionService) {
     this.options = fb.group({
-    
-    floatLabel: this.floatLabelControl,
-  }); }
+
+      floatLabel: this.floatLabelControl,
+    });
+  }
 
   listType: [
-    {"name": "Debit", ID: "Debit", "checked": true},
-    {"name": "Credit", ID: "Credit", "checked": false}
+    { "name": "Debit", ID: "Debit", "checked": true },
+    { "name": "Credit", ID: "Credit", "checked": false }
   ]
-  
- 
-  
-  transaction: Transaction[] = [];
+
+
+
+  transaction: Transaction = new Transaction();
 
   save() {
-    debugger;
-         this.transactionService.addTransactions(this.transaction).subscribe((data: any) => {
-           if(data.success){
+    this.transactionService.addTransactions(this.transaction).subscribe((data: any) => {
+      if (data.success) {
 
-            //  this.messageService.add({severity:'success', summary:'Message', detail:'New Recipe Added.'});
-            console.log("added");
-           
-           }
-           else{
+        //  this.messageService.add({severity:'success', summary:'Message', detail:'New Recipe Added.'});
+        console.log("added");
 
-             //this.messageService.add({severity:'error', summary:'Error', detail:data.ErrorMessage});
-             console.log("error");
-             
-           }
-       
-         })
-      
-       }
-     
-    
-  
+      }
+      else {
+
+        //this.messageService.add({severity:'error', summary:'Error', detail:data.ErrorMessage});
+        console.log("error");
+
+      }
+
+    })
+
+  }
+
+
+
 
   ngOnInit() {
   }

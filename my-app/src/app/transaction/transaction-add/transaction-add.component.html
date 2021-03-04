@@ -1,62 +1,66 @@
-
 <div class="mat-elevation-z8 my-container">
   <!-- <span class="material-icons " color="primary">add_box</span> -->
   <button mat-button color="primary" [routerLink]="['/transactions']">Back</button>
-  
-<mat-card class="heading1">
-  <h1 class="md-display-3"><span style="text-align: center;"> Add New Transactions</span> </h1>
-</mat-card>
 
-<form action="" method="post">
+  <mat-card class="heading1">
+    <h1 class="md-display-3"><span style="text-align: center;"> Add New Transactions</span> </h1>
+  </mat-card>
 
-<div>
-  <label>Type: </label>
-  <mat-radio-group >
-    <mat-radio-button value="credit" [checked]='true' [(ngModel)]="transaction.transactionType" name="transactionType">Credit</mat-radio-button>
-    <mat-radio-button value="debit" [(ngModel)]="transaction.transactionType" name="transactionType">Debit</mat-radio-button>
-  </mat-radio-group>
-</div>
-<div>
-  <label>Mode: </label>
-  <mat-radio-group >
-    <mat-radio-button value="cash" [checked]='true' [(ngModel)]="transaction.transactionMode" name="transactionMode">Cash</mat-radio-button>
-    <mat-radio-button value="bank" [(ngModel)]="transaction.transactionMode" name="transactionMode">Bank</mat-radio-button>
-  </mat-radio-group>
-</div>
-<div>
-  
-    <!-- <mat-form-field appearance="outline">
+  <form action="" method="post">
+
+    <div>
+      <label>Type: </label>
+      <mat-radio-group>
+        <mat-radio-button value="credit" [checked]='true' [(ngModel)]="transaction.transationType"
+          name="transationType">Credit</mat-radio-button>
+        <mat-radio-button value="debit" [(ngModel)]="transaction.transationType" name="transationType">Debit
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div>
+      <label>Mode: </label>
+      <mat-radio-group>
+        <mat-radio-button value="cash" [checked]='true' [(ngModel)]="transaction.transactionMode"
+          name="transactionMode">Cash</mat-radio-button>
+        <mat-radio-button value="bank" [(ngModel)]="transaction.transactionMode" name="transactionMode">Bank
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div>
+
+      <!-- <mat-form-field appearance="outline">
       <mat-label>Date</mat-label>
       <input matInput placeholder="Select Date">     
     </mat-form-field> -->
-    <mat-form-field appearance="fill">
-      <mat-label>Choose a date</mat-label>
-      <input matInput [matDatepicker]="picker" [(ngModel)]="transaction.transactionDateTime" name="transactionDateTime">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-  </div>
-  <div>
-  
-      <mat-form-field appearance="outline">
-        <mat-label>Party Name</mat-label>
-        <input matInput placeholder="Enter Party Name" [(ngModel)]="transaction.partyName" name="partyName">     
+      <mat-form-field appearance="fill">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="transaction.transactionDateTime"
+          name="transactionDateTime">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
     </div>
     <div>
-     
-        <mat-form-field appearance="outline">
-          <mat-label>Description</mat-label>
-          <input matInput placeholder="Enter Description" [(ngModel)]="transaction.description" name="description">     
-        </mat-form-field>
-      </div>
-      <div>
-       
-          <mat-form-field appearance="outline">
-            <mat-label>Amount</mat-label>
-            <input matInput placeholder="Enter Amount" [(ngModel)]="transaction.amount" name="amount">     
-          </mat-form-field>
-        </div>
-        <button mat-button color="primary" (click)="save()">Save</button>
-</form>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Party Name</mat-label>
+        <input matInput placeholder="Enter Party Name" [(ngModel)]="transaction.partyName" name="partyName">
+      </mat-form-field>
+    </div>
+    <div>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <input matInput placeholder="Enter Description" [(ngModel)]="transaction.description" name="description">
+      </mat-form-field>
+    </div>
+    <div>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Amount</mat-label>
+        <input matInput placeholder="Enter Amount" [(ngModel)]="transaction.amount" name="amount">
+      </mat-form-field>
+    </div>
+    <button mat-button color="primary" (click)="save()">Save</button>
+  </form>
 </div>

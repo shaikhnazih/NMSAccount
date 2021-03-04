@@ -6,7 +6,7 @@ const sql = require("../database/connection");
 const Transactions = function (tranc) {
     this.partyName = tranc.partyName;
     this.amount = tranc.amount;
-    this.transcationType = tranc.transcationType;
+    this.transactionType = tranc.transactionType;
 };
 
 Transactions.getAll = result => {
@@ -14,7 +14,7 @@ Transactions.getAll = result => {
         // sql.query("select  id,transactionType,transactionMode,description,createdDate,modifiedDate,isdeleted,partyName, case when transactiontype ='Credit' then amount else (amount*(-1)) end as amount  from transaction", (err, res) => {
         if (err) {
             console.log("error: ", err);
-            result( err,null);
+            result(err, null);
             return;
         }
 
