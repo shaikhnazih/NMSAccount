@@ -1,5 +1,4 @@
 
-const Transactions = require('../services/transactionRepo');
 const transactionService = require('../services/transactionRepo');
 
 var transactionControllers = {};
@@ -11,17 +10,8 @@ transactionControllers.create = (req, res) => {
             message: "Content can not be empty!"
         });
     }
- 
-    // Create a Tansaction
-    const transaction = new Transactions({
-        transactionType: req.body.transactionType,
-        transactionMode: req.body.transactionMode,
-        transactionDateTime: req.body.transactionDateTime,
-        partyName: req.body.partyName,
-        description: req.body.description,
-        amount: req.body.amount
-    });
 
+    var transaction = req.body.data;
     // Save Tansaction in the database
     transactionService.Add(transaction, (err, data) => {
         if (err)

@@ -7,17 +7,17 @@ const services = require('../services/render')
 
 
 route.get('/', services.homeRoutes)
-var data = [{name:'naazih',age:34},{name:'naazih',age:34}]
+var data = [{ name: 'naazih', age: 34 }, { name: 'naazih', age: 34 }]
 
 var method = (req, res) => {
     console.log(req.body);
-    
-    var dbconnection= true;
+
+    var dbconnection = true;
     res.send('')
-   
+
 
 };
-route.post('/GetJSON',method )
+route.post('/GetJSON', method)
 
 
 

@@ -10,19 +10,18 @@
 
     <div>
       <label>Type: </label>
-      <mat-radio-group>
-        <mat-radio-button value="credit" [checked]='true' [(ngModel)]="transaction.transationType"
-          name="transationType">Credit</mat-radio-button>
-        <mat-radio-button value="debit" [(ngModel)]="transaction.transationType" name="transationType">Debit
+      <mat-radio-group [(ngModel)]="transaction.transactionType" name="transactionType">
+        <mat-radio-button [checked]='true' value="credit">Credit
+        </mat-radio-button>
+        <mat-radio-button value="debit">Debit
         </mat-radio-button>
       </mat-radio-group>
     </div>
     <div>
       <label>Mode: </label>
-      <mat-radio-group>
-        <mat-radio-button value="cash" [checked]='true' [(ngModel)]="transaction.transactionMode"
-          name="transactionMode">Cash</mat-radio-button>
-        <mat-radio-button value="bank" [(ngModel)]="transaction.transactionMode" name="transactionMode">Bank
+      <mat-radio-group [(ngModel)]="transaction.transactionMode" name="transactionMode">
+        <mat-radio-button value="cash" [checked]='true' name="transactionMode">Cash</mat-radio-button>
+        <mat-radio-button value="bank">Bank
         </mat-radio-button>
       </mat-radio-group>
     </div>

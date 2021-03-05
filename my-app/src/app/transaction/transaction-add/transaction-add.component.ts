@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, FormsModule } from '@angular/forms';
 import { TransactionService } from 'src/app/services/transaction.service';
+import { DateAdapter } from '@angular/material';
 
 export class Transaction {
   id: string;
-  transationType?: string;
+  transactionType?: string;
   transactionMode?: string;
   description?: string;
   partyName?: string;
@@ -23,6 +24,7 @@ export class TransactionAddComponent implements OnInit {
   floatLabelControl = new FormControl('auto');
 
   constructor(fb: FormBuilder, private transactionService: TransactionService) {
+
     this.options = fb.group({
 
       floatLabel: this.floatLabelControl,
@@ -39,7 +41,7 @@ export class TransactionAddComponent implements OnInit {
   transaction: Transaction = new Transaction();
 
   save() {
-    this.transactionService.addTransactions(this.transaction).subscribe((data: any) => {
+    this.transactionService.addTransactions({ data: this.transaction }).subscribe((data: any) => {
       if (data.success) {
 
         //  this.messageService.add({severity:'success', summary:'Message', detail:'New Recipe Added.'});
@@ -58,6 +60,10 @@ export class TransactionAddComponent implements OnInit {
   }
 
 
+  ngDoCheck() {
+    console.log(this.transaction)
+
+  }
 
 
   ngOnInit() {

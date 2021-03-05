@@ -3,11 +3,7 @@ var mysql = require('mysql');
 const sql = require("../database/connection");
 
 
-const Transactions = function (tranc) {
-    this.partyName = tranc.partyName;
-    this.amount = tranc.amount;
-    this.transactionType = tranc.transactionType;
-};
+const Transactions = {}
 
 Transactions.getAll = result => {
     sql.query("select  id,transactionDateTime,transactionType,transactionMode,description,createdDate,modifiedDate,isdeleted,partyName, amount  from transaction", (err, res) => {
