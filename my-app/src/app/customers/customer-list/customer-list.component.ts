@@ -7,12 +7,8 @@ import { Title } from '@angular/platform-browser';
 import { NotificationService } from '../../core/services/notification.service';
 import { PartyService } from 'src/app/services/party.service';
 import { MatPaginator } from '@angular/material/paginator';
+import { Party } from 'src/app/Model/Dto';
 
-export interface Party {
-  PartyName: string;
-  Category: string;
-
-}
 
 const ELEMENT_DATA: Party[] = [
   { PartyName: 'aa', Category: 'Hydrogen' },

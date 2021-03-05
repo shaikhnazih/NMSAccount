@@ -6,6 +6,10 @@ import {
   MAT_DATE_FORMATS
 } from '@angular/material';
 import { formatDate } from '@angular/common';
+import { PartyService } from 'src/app/services/party.service';
+import { Party } from 'src/app/Model/Dto';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 export const PICK_FORMATS = {
   parse: { dateInput: { month: 'short', year: 'numeric', day: 'numeric' } },
@@ -52,9 +56,14 @@ export class Transaction {
 })
 export class TransactionAddComponent implements OnInit {
   addform: FormGroup;
+  filteredOptions: Observable<string[]>;
+  parties: string[] = [];
+
   //addform = new FormControl('auto');
 
-  constructor(fb: FormBuilder, private transactionService: TransactionService) {
+  constructor(fb: FormBuilder, private transactionService: TransactionService,
+    private partyService: PartyService
+  ) {
 
 
     this.addform = new FormGroup({
@@ -77,7 +86,6 @@ export class TransactionAddComponent implements OnInit {
     { "name": "Debit", ID: "Debit", "checked": true },
     { "name": "Credit", ID: "Credit", "checked": false }
   ]
-
 
 
   transaction: Transaction = new Transaction();
@@ -104,6 +112,26 @@ export class TransactionAddComponent implements OnInit {
 
 
   ngOnInit() {
+
+    this.partyService.getParties().subscribe((parties: Party[]) => {
+      console.log(parties);
+      this.parties = parties.map((party) => (party.PartyName));
+      //this.resultsLength = this.parties.total_count;
+    });
+
+
+    this.filteredOptions = this.addform.controls['partyName'].valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    );
   }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.parties.filter(option => option.toLowerCase().includes(filterValue));
+  }
+
+
 
 }
