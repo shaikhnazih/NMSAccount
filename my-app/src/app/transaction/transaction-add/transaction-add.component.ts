@@ -1,7 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, FormsModule } from '@angular/forms';
 import { TransactionService } from 'src/app/services/transaction.service';
-import { DateAdapter } from '@angular/material';
+import {
+  NativeDateAdapter, DateAdapter,
+  MAT_DATE_FORMATS
+} from '@angular/material';
+import { formatDate } from '@angular/common';
+
+export const PICK_FORMATS = {
+  parse: { dateInput: { month: 'short', year: 'numeric', day: 'numeric' } },
+  display: {
+    dateInput: 'input',
+    monthYearLabel: { year: 'numeric', month: 'short' },
+    dateA11yLabel: { year: 'numeric', month: 'long', day: 'numeric' },
+    monthYearA11yLabel: { year: 'numeric', month: 'long' }
+  }
+};
+
+
+
+class PickDateAdapter extends NativeDateAdapter {
+  format(date: Date, displayFormat: Object): string {
+    if (displayFormat === 'input') {
+      return formatDate(date, 'dd/MM/yyyy', this.locale);
+    } else {
+      return formatDate(date, 'dd/MM/yyyy', this.locale);
+      //  return date.toDateString();
+    }
+  }
+}
 
 export class Transaction {
   id: string;
@@ -17,18 +44,33 @@ export class Transaction {
 @Component({
   selector: 'app-transaction-add',
   templateUrl: './transaction-add.component.html',
-  styleUrls: ['./transaction-add.component.css']
+  styleUrls: ['./transaction-add.component.css'],
+  providers: [
+    { provide: DateAdapter, useClass: PickDateAdapter },
+    { provide: MAT_DATE_FORMATS, useValue: PICK_FORMATS }
+  ]
 })
 export class TransactionAddComponent implements OnInit {
-  options: FormGroup;
-  floatLabelControl = new FormControl('auto');
+  addform: FormGroup;
+  //addform = new FormControl('auto');
 
   constructor(fb: FormBuilder, private transactionService: TransactionService) {
 
-    this.options = fb.group({
 
-      floatLabel: this.floatLabelControl,
-    });
+    this.addform = new FormGroup({
+      partyName: new FormControl(),
+      description: new FormControl(),
+      amount: new FormControl(),
+      transactionMode: new FormControl(),
+      transactionType: new FormControl(),
+      transactionDateTime: new FormControl(),
+
+
+    })
+    // this.options = fb.group({
+
+    //   floatLabel: this.addform,
+    // });
   }
 
   listType: [
@@ -59,11 +101,6 @@ export class TransactionAddComponent implements OnInit {
 
   }
 
-
-  ngDoCheck() {
-    console.log(this.transaction)
-
-  }
 
 
   ngOnInit() {

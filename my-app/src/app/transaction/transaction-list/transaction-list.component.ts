@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { NGXLogger } from 'ngx-logger';
 import { Title } from '@angular/platform-browser';
 
 import { NotificationService } from '../../core/services/notification.service';
@@ -32,7 +31,7 @@ export class TransactionListComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  constructor(private logger: NGXLogger,
+  constructor(
     private notificationService: NotificationService,
     private titleService: Title,
     private transactionService: TransactionService) {
@@ -50,10 +49,10 @@ export class TransactionListComponent implements OnInit {
       //this.resultsLength = this.parties.total_count;
     });
   }
-  btnClick= function () {
+  btnClick = function () {
     alert("btnClick");
     this.router.navigateByUrl('./customers/customers.module#CustomersModule');
-};
+  };
   ngOnInit() {
     this.getData();
     this.titleService.setTitle('Accounts - Transaction');
