@@ -11,8 +11,8 @@ export class TransactionService {
   constructor(private http: HttpClient) { }
   rootURL = '/api';
 
-  getTransactions() {
-    return this.http.get(this.rootURL + '/transaction');
+  getTransactions(filterType: string) {
+    return this.http.get(this.rootURL + '/transaction/'+filterType);
   }
 
   addTransactions(transaction: any) {

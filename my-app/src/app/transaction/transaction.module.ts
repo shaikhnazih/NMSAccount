@@ -6,6 +6,8 @@ import { SharedModule } from '../shared/shared.module';
 import { TransactionAddComponent } from './transaction-add/transaction-add.component';
 import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 import { MatRadioModule } from '@angular/material';
+import {MatGridListModule} from '@angular/material/grid-list';
+
 @NgModule({
   declarations: [TransactionListComponent, TransactionAddComponent],
   imports: [
@@ -14,7 +16,8 @@ import { MatRadioModule } from '@angular/material';
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    MatRadioModule
+    MatRadioModule,
+    MatGridListModule
   ],
   // declarations: [
   //   TransactionListComponent

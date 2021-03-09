@@ -37,9 +37,9 @@ export class TransactionListComponent implements OnInit {
     private transactionService: TransactionService) {
 
   }
-
+filterType:string="ALL";
   getData() {
-    this.transactionService.getTransactions().subscribe((transaction: Transaction[]) => {
+    this.transactionService.getTransactions(this.filterType).subscribe((transaction: Transaction[]) => {
       console.log(transaction);
       this.dataSource = new MatTableDataSource(transaction);
       this.dataSource.paginator = this.paginator;

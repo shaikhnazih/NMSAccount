@@ -12,6 +12,10 @@ transactionControllers.create = (req, res) => {
     }
 
     var transaction = req.body.data;
+    console.log(transaction.transactionDateTime)
+
+    transaction.transactionDateTime = new Date(transaction.transactionDateTime);
+    console.log(transaction.transactionDateTime)
     // Save Tansaction in the database
     transactionService.Add(transaction, (err, data) => {
         if (err)
@@ -26,14 +30,28 @@ transactionControllers.create = (req, res) => {
 //retrive and return all users
 
 transactionControllers.find = (req, res) => {
-    transactionService.getAll((err, data) => {
-        if (err)
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while retrieving transactions."
-            });
-        else res.send(data);
-    });
+    var type=req.params.type;
+    if(type="ALL")
+    {
+        transactionService.getAll((err, data) => {
+            if (err)
+                res.status(500).send({
+                    message:
+                        err.message || "Some error occurred while retrieving transactions."
+                });
+            else res.send(data);
+        });
+    }
+    else{
+        transactionService.getTop10((err, data) => {
+            if (err)
+                res.status(500).send({
+                    message:
+                        err.message || "Some error occurred while retrieving transactions."
+                });
+            else res.send(data);
+        });
+    }
 }
 
 transactionControllers.update = (req, res) => {

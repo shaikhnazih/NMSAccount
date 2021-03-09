@@ -1,6 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, FormsModule } from '@angular/forms';
 import { TransactionService } from 'src/app/services/transaction.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort, MatSortable } from '@angular/material/sort';
+import { Title } from '@angular/platform-browser';
+import { NotificationService } from '../../core/services/notification.service';
+import { MatPaginator } from '@angular/material/paginator';
+import {MatGridListModule} from '@angular/material/grid-list';
+
 import {
   NativeDateAdapter, DateAdapter,
   MAT_DATE_FORMATS
@@ -36,8 +43,8 @@ class PickDateAdapter extends NativeDateAdapter {
 
 export class Transaction {
   id: string;
-  transactionType?: string;
-  transactionMode?: string;
+  transactionType?: string="credit";
+  transactionMode?: string="cash";
   description?: string;
   partyName?: string;
   amount?: string;
@@ -58,8 +65,10 @@ export class TransactionAddComponent implements OnInit {
   addform: FormGroup;
   filteredOptions: Observable<string[]>;
   parties: string[] = [];
-
+  displayedColumns: string[] = ['partyName', 'amount'];
+  dataSource = new MatTableDataSource();
   //addform = new FormControl('auto');
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(fb: FormBuilder, private transactionService: TransactionService,
     private partyService: PartyService
@@ -87,7 +96,18 @@ export class TransactionAddComponent implements OnInit {
     { "name": "Credit", ID: "Credit", "checked": false }
   ]
 
+  getData() {
+    this.transactionService.getTransactions("Top10").subscribe((transaction: Transaction[]) => {
+      console.log(transaction);
+      this.dataSource = new MatTableDataSource(transaction);
+      // this.dataSource.paginator = this.paginator;
+      this.sort.sort(({ id: 'id', start: 'desc'}) as MatSortable);
+       this.dataSource.sort = this.sort;
 
+
+      //this.resultsLength = this.parties.total_count;
+    });
+  }
   transaction: Transaction = new Transaction();
 
   save() {
@@ -96,13 +116,13 @@ export class TransactionAddComponent implements OnInit {
 
         //  this.messageService.add({severity:'success', summary:'Message', detail:'New Recipe Added.'});
         console.log("added");
-
+        this.getData();
       }
       else {
 
         //this.messageService.add({severity:'error', summary:'Error', detail:data.ErrorMessage});
         console.log("error");
-
+        this.getData();
       }
 
     })
@@ -112,11 +132,13 @@ export class TransactionAddComponent implements OnInit {
 
 
   ngOnInit() {
-
+    this.getData();
     this.partyService.getParties().subscribe((parties: Party[]) => {
       console.log(parties);
       this.parties = parties.map((party) => (party.PartyName));
       //this.resultsLength = this.parties.total_count;
+
+
     });
 
 

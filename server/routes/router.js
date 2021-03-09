@@ -31,7 +31,7 @@ route.delete('/api/party/:id', controller.partyControllers.delete);
 
 //API Transactions
 route.post('/api/transaction', controller.transactionControllers.create);
-route.get('/api/transaction', controller.transactionControllers.find);
+route.get('/api/transaction/:type', controller.transactionControllers.find);
 route.put('/api/transaction/:id', controller.transactionControllers.update);
 route.delete('/api/transaction/:id', controller.transactionControllers.delete);
 
