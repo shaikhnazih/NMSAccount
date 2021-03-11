@@ -12,11 +12,16 @@ export class TransactionService {
   rootURL = '/api';
 
   getTransactions(filterType: string) {
-    return this.http.get(this.rootURL + '/transaction/'+filterType);
+    return this.http.get(this.rootURL + '/transaction/' + filterType);
   }
 
   addTransactions(transaction: any) {
     console.log(transaction)
     return this.http.post(this.rootURL + '/transaction', transaction);
   }
+
+  // addTransactions(type: string) {
+  //   console.log(transaction)
+  //   return this.http.post(this.rootURL + '/transaction', {type:type});
+  // }
 }
