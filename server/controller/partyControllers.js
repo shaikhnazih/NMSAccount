@@ -19,7 +19,7 @@ partyControllers.create = (req, res) => {
     });
 
     // Save Customer in the database
-    Party.Add(party, (err, data) => {
+    partyServices.Add(party, (err, data) => {
         if (err)
             res.status(500).send({
                 message:

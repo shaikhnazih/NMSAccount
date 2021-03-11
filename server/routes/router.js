@@ -35,6 +35,8 @@ route.get('/api/transaction/:type', controller.transactionControllers.find);
 route.put('/api/transaction/:id', controller.transactionControllers.update);
 route.delete('/api/transaction/:id', controller.transactionControllers.delete);
 
+//API dashboard
+route.post('/api/dashboard/', controller.dashboardControllers.get);
 
 
 
